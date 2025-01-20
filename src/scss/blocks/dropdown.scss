@@ -1,0 +1,187 @@
+@use "../variables";
+@use "../mixins";
+
+.dropdown {
+  position: relative;
+  cursor: pointer;
+
+  @include mixins.hover-focus {
+    .dropdown__content {
+      opacity: 1;
+      pointer-events: initial;
+
+      transition: opacity variables.$trans-default;
+    }
+
+    &::after {
+      transform: rotate(0);
+    }
+  }
+
+  &::after {
+    position: absolute;
+    right: -20px;
+    margin: 0 0 0 8px;
+    content: '';
+    display: block;
+    width: 8px;
+    height: 6px;
+    background-color: variables.$color-sea-buckthorn;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    transform: rotate(180deg);
+    transition: transform variables.$trans-default;
+
+    @include mixins.vp-1023 {
+      display: none;
+    }
+  }
+}
+
+.dropdown__wrapper {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+
+  @include mixins.vp-1023 {
+    position: initial;
+  }
+}
+
+.dropdown__content,
+.dropdown__sub-content {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+
+  @include mixins.vp-1023 {
+    position: initial;
+    opacity: 1;
+  }
+}
+
+.dropdown__content {
+  top: 0;
+  left: -19px;
+}
+
+.dropdown__sub-content {
+  left: calc(100%);
+  bottom: 0;
+  padding-left: 22px;
+
+  @include mixins.vp-1023 {
+    padding: 0;
+  }
+}
+
+.dropdown__sub {
+  @include mixins.hover-focus {
+    .dropdown__sub-content {
+      opacity: 1;
+      pointer-events: initial;
+
+      transition: opacity variables.$trans-default;
+    }
+  }
+}
+
+.dropdown__text {
+  display: flex;
+  align-items: center;
+
+  @include mixins.vp-1023 {
+    width: 100%;
+    padding: 20px;
+    background-color: variables.$color-black-russian-2;
+    border-bottom: 1px solid variables.$color-black-russian;
+  }
+
+  &::after {
+
+    @include mixins.vp-1023 {
+      margin: 0 0 0 8px;
+      content: '';
+      display: block;
+      width: 8px;
+      height: 6px;
+      background-color: variables.$color-sea-buckthorn;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      transform: rotate(180deg);
+      transition: transform variables.$trans-default;
+    }
+  }
+}
+
+.is-active.dropdown .dropdown__text {
+  background-color: variables.$color-black-russian;
+}
+
+.dropdown.is-active .dropdown__text {
+  @include mixins.vp-1023 {
+    &::after {
+      transform: rotate(0);
+    }
+  }
+}
+
+.is-active.dropdown__sub-wrapper .dropdown__sub-text {
+  @include mixins.vp-1023 {
+    background-color: variables.$color-black-russian;
+  }
+}
+
+
+.dropdown__sub-wrapper.is-active .dropdown__sub-text::after {
+  @include mixins.vp-1023 {
+    transform: rotate(180deg);
+  }
+}
+
+.dropdown__sub-wrapper {
+  overflow: hidden;
+}
+
+.dropdown__sub-text {
+  position: relative;
+  display: block;
+
+  @include  mixins.vp-1023 {
+    display: flex;
+    align-items: center;
+  }
+
+  &::after {
+    position: absolute;
+    right: 18px;
+    top: 16px;
+    margin: 0 0 0 8px;
+    content: '';
+    display: block;
+    width: 8px;
+    height: 6px;
+    background-color: variables.$color-sea-buckthorn;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    transform: rotate(-90deg);
+    transition: transform variables.$trans-default;
+
+    @include mixins.vp-1023 {
+      transform: initial;
+      position: initial;
+    }
+  }
+
+  @include mixins.hover-focus {
+    &::after {
+      transform: rotate(90deg);
+    }
+  }
+
+  @include mixins.vp-1023 {
+    @include mixins.hover-focus {
+      &::after {
+        transform: none;
+      }
+    }
+  }
+}
+

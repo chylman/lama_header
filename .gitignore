@@ -10,7 +10,6 @@
 /playwright/.cache/
 
 # production
-/dist
 /dist-ssr
 
 # various

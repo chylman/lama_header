@@ -1,0 +1,31 @@
+@use "../variables";
+@use "../mixins";
+
+.link {
+  display: flex;
+  align-items: center;
+
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+
+  color: variables.$color-default-white;
+
+  transition: color variables.$trans-default;
+
+  @include mixins.hover-focus {
+    color: variables.$color-flamingo;
+  }
+}
+
+.link__icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}

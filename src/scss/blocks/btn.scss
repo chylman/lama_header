@@ -1,0 +1,24 @@
+@use "../mixins";
+@use "../variables";
+
+.btn {
+  display: inline-flex;
+  padding: 10px 20px;
+
+  color: variables.$color-default-white;
+
+  border: none;
+  cursor: pointer;
+
+  transition: opacity variables.$trans-default;
+
+  &:disabled {
+    opacity: 0.5;
+
+    pointer-events: none;
+  }
+
+  @include mixins.hover-focus {
+    opacity: 0.8;
+  }
+}

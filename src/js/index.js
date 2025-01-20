@@ -1,26 +1,49 @@
-import '../css/global.css';
-import '../scss/global.scss';
+import '../scss/style.scss';
 
-document.addEventListener('DOMContentLoaded', () => {
-  const main = document.querySelector('#main');
-  const counter = main.querySelector('#counter');
+import { iosVhFix } from './utils/ios-vh-fix';
+import { initMenu } from './modules/menu/init-menu.js';
+import { initAccordions } from './modules/accordion/init-accordion.js';
 
-  main.addEventListener('click', (event) => {
-    const { id, type } = event.target;
+// ---------------------------------
 
-    if (type === 'button') {
-      const currentCount = Number(counter.textContent);
+window.addEventListener('DOMContentLoaded', () => {
+  // Utils
+  // ---------------------------------
 
-      switch (id) {
-        case 'increment': {
-          counter.textContent = currentCount + 1;
-          break;
-        }
-        case 'decrement': {
-          counter.textContent = currentCount - 1;
-          break;
-        }
-      }
-    }
+  iosVhFix();
+
+  // Modules
+  // ---------------------------------
+
+  // все скрипты должны быть в обработчике 'DOMContentLoaded', но не все в 'load'
+  // в load следует добавить скрипты, не участвующие в работе первого экрана
+  window.addEventListener('load', () => {
+    initMenu();
+    initAccordions();
   });
 });
+
+// ---------------------------------
+
+// ❗❗❗ обязательно установите плагины eslint, stylelint, editorconfig в редактор кода.
+
+// привязывайте js не на классы, а на дата атрибуты (data-validate)
+
+// вместо модификаторов .block--active используем утилитарные классы
+// .is-active || .is-open || .is-invalid и прочие (обязателен нейминг в два слова)
+// .select.select--opened ❌ ---> [data-select].is-open ✅
+
+// выносим все в дата атрибуты
+// url до иконок пинов карты, настройки автопрокрутки слайдера, url к json и т.д.
+
+// для адаптивного JS используейтся matchMedia и addListener
+// const breakpoint = window.matchMedia(`(min-width:1024px)`);
+// const breakpointChecker = () => {
+//   if (breakpoint.matches) {
+//   } else {
+//   }
+// };
+// breakpoint.addListener(breakpointChecker);
+// breakpointChecker();
+
+// используйте .closest(el)

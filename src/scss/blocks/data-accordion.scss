@@ -1,0 +1,21 @@
+@use "../mixins";
+
+[data-accordion="element"].is-active > [data-accordion="content"] {
+  @include mixins.vp-1023 {
+    max-height: 100%;
+  }
+}
+
+[data-accordion="parent"].no-transition [data-accordion="content"] {
+  @include mixins.vp-1023 {
+    transition: none;
+  }
+}
+
+[data-accordion="content"] {
+  @include mixins.vp-1023 {
+    max-height: 0;
+    transition: max-height 0.3s;
+    overflow: hidden;
+  }
+}

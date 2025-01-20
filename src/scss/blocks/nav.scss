@@ -1,0 +1,211 @@
+@use "../variables";
+@use "../mixins";
+
+.nav {
+  margin: 0 auto;
+
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 400;
+
+  @include mixins.vp-1023 {
+    position: absolute;
+    top: var(--header-height);
+    right: 0;
+    font-size: 16px;
+
+    width: 374px;
+    min-height: calc((100 * var(--vh, 1vh)) - var(--header-height));
+
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+
+    background-color: variables.$color-black-russian;
+    transition: clip-path variables.$trans-600;
+    pointer-events: none;
+  }
+
+  @include mixins.vp-767 {
+    width: 100%;
+  }
+}
+
+.is-menu-open .nav {
+  @include mixins.vp-1023 {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    pointer-events: auto;
+  }
+}
+
+.nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 58px;
+  margin: 0;
+  padding: 0 10px;
+
+  list-style: none;
+
+  @include mixins.vp-1023 {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 0;
+  }
+}
+
+.nav__item {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  height: 100%;
+  padding: 28px 0 29px;
+
+  color: variables.$color-snow;
+
+  transition: color variables.$trans-default;
+
+
+  @include mixins.hover-focus {
+    color: variables.$color-flamingo;
+  }
+
+  @include mixins.vp-1023 {
+    flex-direction: column;
+    align-items: flex-start;
+
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.nav__inner-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  width: 320px;
+  list-style: none;
+
+  font-size: 16px;
+
+  @include mixins.vp-1023 {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+  }
+
+  &::before {
+    z-index: 99;
+    position: absolute;
+    top: -13px;
+    left: 47px;
+    content: '';
+    display: block;
+    width: 28px;
+    height: 14px;
+    background-color: variables.$color-black-russian-2;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+
+    @include mixins.vp-1023 {
+      display: none;
+    }
+  }
+
+  &--arrow-left {
+    &::before {
+      transform: rotate(-90deg);
+      top: initial;
+      bottom: 17px;
+      left: 2px;
+    }
+  }
+
+  &--full-rounded {
+    .nav__inner-item:first-child {
+      border-radius: 8px 8px 0 0;
+      border-top: 1px solid variables.$color-black-russian-2;
+
+      @include mixins.vp-1023 {
+        border: none;
+        border-radius: initial;
+      }
+    }
+  }
+
+  &--w-180 {
+    width: 210px;
+
+    @include mixins.vp-1023 {
+      width: 100%;
+    }
+  }
+}
+
+.nav__inner-item {
+  display: flex;
+  overflow: hidden;
+  background-color: variables.$color-black-russian-2;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid rgba(variables.$color-default-white, 0.1);
+
+    @include mixins.vp-1023 {
+      border: none;
+    }
+  }
+
+  &:last-child {
+    border-radius: 0 0 8px 8px;
+    border-bottom: 1px solid variables.$color-black-russian-2;
+
+    @include mixins.vp-1023 {
+      border: none;
+      border-radius: initial;
+    }
+  }
+
+  @include mixins.vp-1023 {
+    flex-direction: column;
+    background-color: initial;
+  }
+}
+
+.nav__inner-link {
+  padding: 7px 18px;
+  width: 100%;
+  background-color: transparent;
+  color: variables.$color-snow;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: background-color variables.$trans-default;
+
+  @include mixins.hover-focus {
+    background-color: variables.$color-black-russian;
+  }
+
+  @include mixins.vp-1023 {
+    padding: 20px;
+    background-color: variables.$color-black-russian-2;
+    border-bottom: 1px solid variables.$color-black-russian;
+  }
+}
+
+.nav__link {
+  display: flex;
+  color: inherit;
+  cursor: pointer;
+
+  @include mixins.vp-1023 {
+    width: 100%;
+    padding: 20px;
+
+    background-color: variables.$color-black-russian-2;
+    border-bottom: 1px solid variables.$color-black-russian;
+  }
+}
+
+.nav__toggle {
+  display: none;
+}
