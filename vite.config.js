@@ -20,5 +20,6 @@ export default {
     partytownVite({
       dest: path.join(__dirname, 'dist', '~partytown')
     })
-  ]
+  ],
+  base: '/lama_header/'
 };
